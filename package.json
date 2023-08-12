@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "workspace:build:watch": "npm run build:watch --workspaces --if-present",
+    "dev": "concurrently \"npm run workspace:build:watch\" \"next dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -26,6 +27,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "concurrently": "^8.2.0",
     "json-server": "^0.17.3"
   },
   "workspaces": [
