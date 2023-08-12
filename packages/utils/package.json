@@ -3,12 +3,14 @@
   "version": "0.0.1",
   "description": "project utilities",
   "private": true,
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
   "devDependencies": {
     "typescript": "^5.1.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc --declaration",
+    "build:watch": "tsc --declaration -w"
   },
   "author": "yuu",
   "license": "MIT",
