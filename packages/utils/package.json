@@ -1,0 +1,25 @@
+{
+  "name": "@flutia/utils",
+  "version": "0.0.1",
+  "description": "project utilities",
+  "main": "index.js",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yuu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/yuu/swr-react-query-example.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "bugs": {
+    "url": "https://github.com/yuu/swr-react-query-example/issues"
+  },
+  "homepage": "https://github.com/yuu/swr-react-query-example#readme"
+}
