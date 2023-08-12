@@ -1,0 +1,9 @@
+{
+  "posts": [
+    {
+      "title": "test",
+      "id": 1
+    }
+  ],
+  "users": []
+}

@@ -41,6 +41,11 @@
       "restartOn": {
         "files": ["./package.json"]
       }
+    },
+    "mock:start": {
+      "name": "Start Mock Server",
+      "command": "npm run mock",
+      "runAtStart": false
     }
   }
 }
