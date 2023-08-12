@@ -2,6 +2,7 @@
   "name": "@flutia/utils",
   "version": "0.0.1",
   "description": "project utilities",
+  "private": true,
   "main": "index.js",
   "devDependencies": {
     "typescript": "^5.1.6"
