@@ -7,10 +7,3 @@ export const fetcher = async (url: string) => {
   const res = await fetch(new URL(url, BASE_URL).toString());
   return await res.json();
 };
-
-export const queryFetcher = async (args: any) => {
-  // TODO: use signal fetch(url, { signal }) -> AbortSignal
-  // TODO: how to use URL
-  const res = await fetch(new URL(url, BASE_URL).toString());
-  return await res.json();
-};
