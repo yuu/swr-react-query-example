@@ -9,21 +9,17 @@ const Profile = () => {
 
   const queryKey = ["api/posts/", "1"];
 
-  const { data, isLoading, error } = useQuery(
-    ["api/posts/", "1"],
-    async (args) => {
-      return fetcher(args.queryKey.join("/"));
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["api/posts/", "1"],
+    queryFn: async (args) => fetcher(args.queryKey.join("/")),
+    select: (data) => {
+      // e.g. if use toString, data type is string | undefined
+      // i.g io-ts type check?
+      // throw new Error('type error')
+      return data;
     },
-    {
-      select: (data) => {
-        // e.g. if use toString, data type is string | undefined
-        // i.g io-ts type check?
-        // throw new Error('type error')
-        return data
-      },
-      cacheTime: 1000, // test
-    }
-  );
+    cacheTime: 1000, // test
+  });
 
   const mutation = useMutation({
     mutationFn: (data: any) => {
