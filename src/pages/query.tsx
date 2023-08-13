@@ -4,6 +4,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { fetcher, BASE_URL } from "@/lib";
 
+type Post = { id: number; title: string };
+
 const Profile = () => {
   const queryClient = useQueryClient();
 
@@ -21,15 +23,16 @@ const Profile = () => {
     cacheTime: 1000, // test
   });
 
-  const mutation = useMutation({
-    mutationFn: (data: any) => {
-      return fetch(new URL(queryKey.join("/"), BASE_URL).toString(), {
+  const mutation = useMutation<Post, Error, Post, { rollback: () => void }>({
+    mutationFn: async (data) => {
+      await fetch(new URL(queryKey.join("/"), BASE_URL).toString(), {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
+      return Promise.resolve(data);
     },
     onMutate: async (newData) => {
       await queryClient.cancelQueries({ queryKey });
@@ -41,9 +44,9 @@ const Profile = () => {
         rollback: () => queryClient.setQueryData(queryKey, previousData),
       };
     },
-    onError: (error, _variables, context: { rollback: () => void }) => {
+    onError: (error, _variables, context) => {
       toast.error(`Error: ${(error as Error).message}`);
-      context.rollback();
+      context?.rollback();
     },
     onSuccess: (_data, _variables, _context) => {
       toast.success("Successed");
@@ -51,7 +54,7 @@ const Profile = () => {
   });
 
   const handleClick = () => {
-    mutation.mutate({ title: data.title.toUpperCase() });
+    mutation.mutate({ id: data.id, title: data.title.toUpperCase() });
   };
   const handleClick2 = () => undefined;
   const handleClick3 = () => undefined;
@@ -59,7 +62,7 @@ const Profile = () => {
   if (mutation.isError) return <div>mutation error</div>;
   if (mutation.isLoading) return <div>mutation...</div>;
 
-  if (error) return <div>failed to load: {error.message}</div>;
+  if (error) return <div>failed to load: {(error as Error).message}</div>;
   if (isLoading) return <div>loading...</div>;
   return (
     <>
